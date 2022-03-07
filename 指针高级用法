@@ -1,0 +1,23 @@
+//1.const 与 *p
+int i;
+const int *p = &i;
+int const* p = &i;
+int *const p = &i;
+//判断哪个被const了的标志是const在*的前面还好后面
+
+指针是const
+int *const p = &i; // p是const
+p->&i;      //p只能指向i 不能指向其他的地方
+p++;        //ERROR
+*p = 26;    //OK
+
+所指是const
+const int  *P = &i; //*p是const
+*p = 26;    //ERROR *p只能等于i 不能等于其他值
+i = 26;     //OK
+p = &j;     //OK
+
+//2.指针的类型转换
+void* 表示不知道只想什么东西的指针，计算时与char* 相同
+int *p = &i;
+void *q = (void *)p;  //这并没有改变p所指的变量的类型，而是让后人用不同的眼光通过p看它所指的变量
