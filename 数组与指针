@@ -1,0 +1,11 @@
+数组变量是特殊的指针
+int a[10];  // int a[] <-> int *a
+int *p = a; //无需用&取地址
+p[0] = a[0] = *a;
+p = a = &a[0];
+
+数组变量是const的指针，所以不能被赋值
+int a[] <==> int * const a = ...
+int b[];  b = a; // ERROR
+但是可以用指针来相互赋值
+int *b = a / &a[0] //RIGHT
