@@ -1,11 +1,26 @@
-数组变量是特殊的指针
+//1.数组变量是特殊的指针
 int a[10];  // int a[] <-> int *a
 int *p = a; //无需用&取地址
 p[0] = a[0] = *a;
 p = a = &a[0];
 
-数组变量是const的指针，所以不能被赋值
+//2.数组变量是const的指针，所以不能被赋值
 int a[] <==> int * const a = ...
 int b[];  b = a; // ERROR
 但是可以用指针来相互赋值
 int *b = a / &a[0] //RIGHT
+
+//3.*p++
+++比*的优先级高，p++ == p  //取出p所指的数据，顺便p指向下一个位置，常用于数组类连续空间操作
+while( *p++ != val); == search(a[], val);
+
+//4.二维数组
+int a[][];    //ERROR 列必须被赋值
+int *a[5];    //指针数组，整个a是一个数组，里面的元素都是指针 a[0]、a[1]、···、a[4]都是指针
+int (*a)[5];  //数组指针，表示一个指针，a这个指针指向了包含5个整型元素的一维数组
+int **a;      //OK 动态分配的二维数组 需要行列值
+a = (int **)malloc(sizeof(int *)*row);
+for(int i = 0; i < row; i++){
+		a[i] = (int *)malloc(sizeof(int)*col);
+		memset(a[i], 0, sizeof(a[i]));      //ERROR 不要对动态分配的二维数组使用memset 因为对于每一行，是连续分配的；然而对于各行之间，却不是连续非配的
+}
