@@ -1,0 +1,55 @@
+//1.动态申请空间
+//include<stdlib.h>
+int *a;
+a = (int *)malloc(sizeof(int)*n);
+int **a;
+a = (int **)malloc(sizeof(int *)*row);
+for(int i = 0; i < row; i++){
+    a[i] = (int *)malloc(sizeof(int)*col_i);
+}
+
+//2.初始化
+#include<string.h>
+int a[3];    //OK
+int a[3][5]; //OK
+memset(a, 10, sizeof(int));
+
+int **a;
+for(int i = 0; i < row; i++){
+		memset(a[i], 0, sizeof(a[i]));	//ERROR 不要对动态分配的二维数组使用memset 因为对于每一行，是连续分配的；然而对于各行之间，却不是连续非配的
+}
+
+//3.排序
+#include<algorithm>
+c:
+int cmp(const void *a, const void *b)
+  return *(int *)a-*(int *)b;
+qsort(int *a, int k, sizeof(int), cmp);
+
+c++:
+//1.cmp
+bool cmp(const int &a,const int &b)
+{
+    return a > b;
+}
+
+//2.struct cmp1
+struct ss
+{
+    int a, b;
+};
+bool cmp(const ss &a,const ss &b)
+{
+    return a.a < b.a;
+}
+
+//3.struct cmp2
+struct ss
+{
+    int a, b;
+    bool operator < (const ss &s)const{
+        return a < s.a;
+    }
+};
+
+sort(a+n1, a+n2, cmp);
