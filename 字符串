@@ -1,0 +1,41 @@
+字符char
+char是一种整数，也是一种特殊的类型：字符
+char c = 49
+%c来输入输出字符
+printf("%c", c);  //'1'
+printf("%d", c);  // 49
+
+字符串char [] = "   \0"(记得多给一个位置哦）
+字符串以数组的形式存在，以数组或指针的形式访问（常用指针）。
+以0或'\0'结尾的一串字符.
+strlen()不计算最后一个0  sizeof()会计算最后一个,即+1。
+C语言的字符串就是字符数组,通过数组的方式遍历字符串。
+唯一特殊的是字符串字面量可以用来初始化字符数组。
+
+字符串常量
+char *s = "HELLO, WORLD!";
+s是一个指针，初始化为指向一个字符串常量，s是const 不可修改。
+char *s1 = "HELLO, WORLD!";
+char *s2 = "HELLO, WORLD!";
+printf("%p, %p", s1, s2);   //s1 和 s2 的地址相同，指向同一个地方。
+
+字符串变量
+char s[] = "HELLO, WORLD!"; //s3是自己独立的地址
+
+字符串输入输出
+char s[8];
+scanf("%s", s);   //不能读入空格 且最多读入7个 因为最后一个要给'\0'呀  除非你要这样写scanf("%7s", s); 有没有发现不用写&，因为是数组且可以连续初始化
+printf("%s", s);
+经典错误：
+char *s;
+scanf("%s", s);
+因为char *是字符串常量类型！！！必须初始化的。
+
+库函数
+string.h
+1.strlen(char *s);                 //字符串长度
+2.strcmp(char *s1, char *s2);      //字符串比较   == 0 才是相同呢
+3.strcpy(char *dest, char *src);   //字符串复制
+4.strcat(char *dest, char *src);   //字符串拼接
+5.strchr(char *s, int c);          //字符串找字符，其实这个int也是char啦
+6.strstr(char *s1, char *s2);      //字符串找字符串，s1要大于s2的长度哦
