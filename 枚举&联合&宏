@@ -1,0 +1,62 @@
+//1.枚举
+枚举是一种用户定义的数据类型，枚举只能是int
+enum colors{red, yellow, green};    //red = 0, yellow = 1, green = 2;
+enum COLOR{ RED = 1, YELLOW, GREEN = 5, NumCOLORS};     // RED = 1, YELLOW = 2, GREEN = 5, NumCOLORS = 6;
+enum Color clr = GREEN;//只能用枚举常量给枚举变量赋值，才不会出现类型的差异
+clr = 3;
+
+//2.联合体
+union Un
+{
+    char c;
+    int i;
+};
+union Un un;//联合变量的定义
+printf("%d\n", sizeof(un));
+//输出结果为4，由于char和int类型共用同一块空间。
+//1.联合的成员是共用同一块内存空间的，这样一个联合变量的大小，至少是最大成员的大小（因为联合至少得有能力保存最大的那个成员）。
+
+
+#include <stdio.h>
+
+union Un1{
+    char c[5];
+    int i;
+};
+
+union Un2{
+    short c[7];
+    int i;
+};
+
+int main(){
+    printf("%d\n", sizeof(union Un1));//8
+    printf("%d\n", sizeof(union Un2));//16
+    system("pause");
+    return 0;
+}
+//2.当最大成员大小不是最大对齐数的整数倍时，就要对齐到最大对齐数的整数倍。
+
+//3.宏
+编译预处理指令#
+#define用来定义一个宏, 不是C语言，不要加 = ， 不要加 ; ， 一切都要括号
+#define cube(x) ((x)*(x)*(x))
+#define RADTODEG(x) ((x)*57.29578)
+#define MIN(a, b) ((a)>(b)?(b):(a))
+
+tips：
+//1. #include "" 还是 <>
+""要求编译器首先在当前目录（.c文件所在的目录）寻找这个文件
+<>让编译器只在指定的目录去找，编译器自己知道自己的标准库的头文件在哪里
+
+//2. #include的误区
+#include不是用来引入库的，stdio.h里只有printf的原型，源代码在.lib里，现在的C编译器默认会引入所有标准库，
+#include<stdio.h>只是为了让编译器知道printf函数的原型，保证调用时给出的参数值是正确的类型
+
+//3. 不对外公开的函数
+static int f(){};   在函数前面加上static就使得它成为只能在所在的编译单元中被使用的函数
+static int a = 0;   在全局变量前面加上static就使得它成为只能在所在的编译单元中被使用的全局变量
+
+//4. 变量的声明
+int i; 是变量的定义
+extern int i; 是变量的声明
