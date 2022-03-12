@@ -1,0 +1,58 @@
+#include<stdio.h>
+
+int a[100];
+
+int cmp(const void* p, const void *q){
+	return *(int *)p - *(int *)q;
+}
+
+int main(){
+	FILE *fpIn = fopen("C:\\Users\\ThinkPad\\Desktop\\file_test.txt", "rb");
+	if(fpIn == NULL)
+		return 0;
+	FILE *fpOut = fopen("C:\\Users\\ThinkPad\\Desktop\\file_res.txt", "wb");
+	int n = 0;
+	while(fscanf(fpIn, "%d", a+n) != EOF) // char *fgets(char *str, int num, FILE *fp) 读入字符； 
+		++n;
+	fclose(fpIn);
+	qsort(a, n, sizeof(int), cmp);
+	for(int i = 0; i < n; i++)
+		fprintf(fpOut, "%d ", a[i]);
+	fclose(fpOut);
+	return 0;
+	
+	/*读取整个文本文件的字符并输出 
+	char str[1000];
+	FILE *fp = fopen("tmp.txt", "r");
+	while(fgets(str, 990, fp)) 
+		printf(str);
+	fclose(fp);
+	return 0;
+	*/
+	
+	int fputs(char *str, FILE *fp); //将字符串str输出到文件fp 
+	
+	int fseek(FILE *fp, long long offset, int origin); //将文件读写指针定位到距离origin位置offset字节处
+	//origin：SEEK_SET 开头  SEEK_END：末尾  SEEK_CUR：当前 
+	
+	unsigned int fread (void *ptr, unsigned int size, unsigned int count, FILE* stream);
+	//从文件读指针指向的地方的size*count个字节内容，读入到内存地址ptr 
+	
+	unsigned int fwrite(void *ptr, unsigned int size, unsigned int count, FILE *fp);
+	//将内存地址ptr处的size*count个字节内容，写入到文件写指针指向的地方
+	
+	int fgetc(FILE *fp); //读取文件fp的下一个字节 
+	int fputc(int c, FILE *fp); //将c的低8位写入文件fp 
+	
+	//二进制文件读写 
+	FILE *fp = fopen("some.dat", "wb");
+	int x,y;
+	scanf("%d", &x);
+	fwrite(&x, sizeof(int), 1, fp);
+	fclose(fp);
+	fp = fopen("some.dat", "rb");
+	fread(&y, sizeof(int), 1, fp);
+	fclose(fp);
+	printf("%d", y);
+	return 0; 
+} 
