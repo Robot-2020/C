@@ -1,0 +1,67 @@
+//32位环境：
+
+#include<stdio.h>
+
+int y;
+int z = 0;
+static int c;
+static int d;
+
+int main(){
+	int p = 0;
+	int q = 0;
+	int r = 0;
+	static int a;
+	static int b = 0; 
+	printf("&p = %p\n", &p);
+	printf("&q = %p\n", &q);
+	printf("&r = %p\n", &r);
+	printf("局部变量存放在栈区，从高分配，向下增长\n"); 
+	printf("&y = %p\n", &y);
+	printf("&z = %p\n", &z);
+	printf("&c = %p\n", &c);
+	printf("&d = %p\n", &d);
+	printf("&a = %p\n", &a);
+	printf("&b = %p\n", &b);
+	printf("全局变量和静态变量（全局/局部）存放在堆区，从低分配，向上增长\n");
+	return 0;
+}
+
+&p = 0062FE9C
+&q = 0062FE98
+&r = 0062FE94
+局部变量存放在栈区，从高分配，向下增长
+&y = 00405020
+&z = 00405024
+&c = 00405028
+&d = 0040502C
+&a = 00405030
+&b = 00405034
+全局变量和静态变量（全局/局部）存放在堆区，从低分配，向上增长
+
+
+#include<stdio.h>
+
+int main(){	
+  int a[3] = {0, 0, 0};
+	int b[4];
+	int c[2];
+	int p; 
+	int q;
+	printf("&a   = 0x%p\n", a);     //  &a   = 0x0062FE94
+	printf("&b   = 0x%p\n", b);     //  &b   = 0x0062FE84
+	printf("&c   = 0x%p\n", c);     //  &c   = 0x0062FE7C
+	printf("&a+2 = 0x%p\n", a+2);   //  &a+2 = 0x0062FE9C
+	printf("&b+3 = 0x%p\n", b+3);   //  &b+3 = 0x0062FE90
+	
+	printf("&p   = Ox%p\n", &p);    //  &p   = Ox0062FE78
+	printf("&q   = 0x%p\n", &q);    //  &q   = 0x0062FE74
+}
+
+&a   = 0x0062FE94 -> 0x0062FE9C
+&b   = 0x0062FE84 -> 0x0062FE90
+&c   = 0x0062FE7C -> 0x0062FE83
+数组和单个变量存放在一起, 数组也是从高地址向下增长，最后数组指向第一个起始位置。
+&p   = Ox0062FE78
+&q   = 0x0062FE74
+
