@@ -1,0 +1,47 @@
+//1.printf： %[flags][width][.prec][hlL]type
+
+//flags
+-       左对齐
++       在前面放+或-
+(space) 正数留空
+0       0填充
+
+//width / prec
+number  最下字符数
+*       下一个参数是字符数
+.number 小数点后的位数
+.*      下一个参数是小数点后的位数
+
+//hlL
+hh      单个字节
+h       short
+l       long
+ll      long long
+L       long double
+
+//type
+d / i   int
+u       unsigned int
+o       八进制
+x       十六进制
+X       字母大写的十六进制
+f / F   float，6
+e / E   指数
+g / G   float
+a / A   十六进制浮点
+c       char
+s       字符串
+p       指针
+n       读入/写出的个数
+
+
+//2.scanf： %[flag]type
+
+//flag
+*         跳过
+数字      最大字符数
+hh        char
+h         short
+l         long，double
+ll        long long
+L         long double
